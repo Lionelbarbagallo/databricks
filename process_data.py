@@ -5,12 +5,13 @@ import os
 
 # COMMAND ----------
 
-
+try:
+  s3_stage = dbutils.widgets.get("lio_prod_env")
+except:
+  s3_stage = 'dev'
 
 # COMMAND ----------
 
-prod_bucket = os.getenv("LIO_PROD_BUCKET")
-s3_stage = "prod" if prod_bucket else "dev"
 s3_source_dir = f"prueba-lio-{s3_stage}/source"
 s3_sink_dir = f"prueba-lio-{s3_stage}/sink"
 #logging.info(f"Using S3 source dir: {s3_source_dir}")
